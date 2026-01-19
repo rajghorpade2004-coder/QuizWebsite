@@ -1,0 +1,137 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Admin.master.cs" Inherits="Admin" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+
+    <style>
+        /* ✅ Set Background Wallpaper */
+        body {
+            background-image: url('photos/adminbackg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        } 
+
+        /* ✅ Full-Width Navigation Bar */
+        .navbar {
+            width: 100%;
+            max-width: 100%;
+            background-color: rgba(51, 51, 51, 0.9); /* Darker for contrast */
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* ✅ Navbar Links */
+        .navbar a, .navbar button {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            margin-right: 15px;
+            display: inline-block;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .navbar a:hover, .navbar button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* ✅ Logout Button */
+        .logout-button {
+            background-color: #ff4d4d;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .logout-button:hover {
+            background-color: #cc0000;
+        }
+
+        /* ✅ Content Wrapper */
+        .content-wrapper {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            margin: 20px auto;
+            max-width: 1200px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+/* ✅ Footer */
+footer {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    font-weight: bold;
+    border-top: 2px solid rgba(255, 255, 255, 0.3);
+    box-sizing: border-box;
+}
+
+/* ✅ Ensuring Footer Text Remains White */
+footer p {
+    color: white !important;
+}
+
+        /* ✅ Responsive Design */
+        @media (max-width: 100%) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .navbar a {
+                margin: 5px 0;
+            }
+            p {
+                color: white;
+            }
+            
+        }
+    </style>
+    
+</head>
+
+<body>
+    <form id="adminForm" runat="server">
+        <!-- ✅ Admin Navigation Bar -->
+        <div class="navbar">
+            <asp:HyperLink ID="lnkAdminDashboard" runat="server" NavigateUrl="~/AdminDashboard.aspx">Dashboard</asp:HyperLink>
+            <asp:HyperLink ID="lnkManageUsers" runat="server" NavigateUrl="~/ManageUsers.aspx">Manage Users</asp:HyperLink>
+            <asp:HyperLink ID="lnkManageQuizzes" runat="server" NavigateUrl="~/ManageQuizzes.aspx">Manage Quizzes</asp:HyperLink>
+            <asp:HyperLink ID="lnkManageQuestions" runat="server" NavigateUrl="~/ManageQuestions.aspx">Manage Questions</asp:HyperLink>
+            <asp:HyperLink ID="QuizResults" runat="server" NavigateUrl="~/QuizResults.aspx">Quiz Results</asp:HyperLink>
+            <asp:HyperLink ID="lnkMessages" runat="server" NavigateUrl="~/AdminMessages.aspx">Messages</asp:HyperLink>
+            <asp:HyperLink ID="lnkHome" runat="server" NavigateUrl="~/Home.aspx">Go to Site</asp:HyperLink>
+
+            <asp:LinkButton ID="lnkLogout" runat="server" CssClass="logout-button" OnClick="lnkLogout_Click">Logout</asp:LinkButton>
+        </div>
+
+        <!-- ✅ Main Content Section -->
+        <div class="content-wrapper">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+        </div>
+    </form>
+
+    <!-- ✅ Footer Section -->
+    <footer>
+        <p>&copy; 2025 Quiz Admin Panel. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
+

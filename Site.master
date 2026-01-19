@@ -1,0 +1,171 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="Site" %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="UTF-8">
+    <title><asp:ContentPlaceHolder ID="PageTitle" runat="server" /></title>
+
+    <style>
+        /* ✅ Set Background Wallpaper */
+        body {
+            background-image: url('photos/homebackg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        } 
+
+        /* ✅ Full-Width Navigation Bar */
+        .navbar {
+            width: 100%;
+            background-color: rgba(51, 51, 51, 0.9);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* ✅ Logo Styling (Rounded and Better Positioned) */
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            height: 50px; /* Slightly larger for visibility */
+            width: 50px;
+            border-radius: 50%; /* ✅ Makes the logo circular */
+            object-fit: cover; /* Ensures the image fills the circular shape */
+            margin-right: 15px; /* Space between logo and links */
+            border: 2px solid white; /* Optional: Adds a clean border */
+        }
+
+        /* ✅ Navbar Links */
+        .nav-links {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .navbar a, .navbar button {
+            color: white;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 18px;
+            margin-right: 15px;
+            display: inline-block;
+            border: none;
+            background: none;
+            cursor: pointer;
+        }
+
+        .navbar a:hover, .navbar button:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        /* ✅ Logout Button */
+        .logout-button {
+            background-color: #ff4d4d;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .logout-button:hover {
+            background-color: #cc0000;
+        }
+
+        /* ✅ Content Wrapper */
+        .content-wrapper {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            margin: 20px auto;
+            max-width: 1200px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        /* ✅ Footer */
+        footer {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            font-weight: bold;
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+            box-sizing: border-box;
+        }
+
+        /* ✅ Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .logo {
+                margin-bottom: 10px;
+            }
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+            }
+            .navbar a {
+                margin: 5px 0;
+            }
+            footer p {
+                color: white !important;
+            }
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</head>
+
+<body>
+    <form id="masterForm" runat="server">
+        <!-- ✅ Navigation Bar with Logo -->
+        <div class="navbar">
+            <div class="logo-container">
+                <img src="photos/siteimg.jpg" alt="Logo" class="logo" runat="server" />
+            </div>
+            <div class="nav-links">
+                <asp:HyperLink ID="lnkHome" runat="server" NavigateUrl="~/Home.aspx">Home</asp:HyperLink>
+                <asp:HyperLink ID="lnkStartQuiz" runat="server" NavigateUrl="~/StartQuiz.aspx" Visible="false">Start Quiz</asp:HyperLink>
+                <asp:HyperLink ID="lnkQuizHistory" runat="server" NavigateUrl="~/QuizHistory.aspx">Quiz History</asp:HyperLink>
+                <asp:HyperLink ID="lnkLeaderboard" runat="server" NavigateUrl="~/Leaderboard.aspx">Leaderboard</asp:HyperLink>
+                <asp:HyperLink ID="lnkAbout" runat="server" NavigateUrl="~/About.aspx">About</asp:HyperLink>
+                <asp:HyperLink ID="lnkContact" runat="server" NavigateUrl="~/Contact.aspx">Contact</asp:HyperLink>
+                <asp:HyperLink ID="lnkProfile" runat="server" NavigateUrl="~/Profile.aspx" Visible="false">Profile</asp:HyperLink>
+
+                <asp:HyperLink ID="lnkLogin" runat="server" NavigateUrl="~/Login.aspx" Visible="true">Login</asp:HyperLink>
+                <asp:HyperLink ID="lnkRegister" runat="server" NavigateUrl="~/Register.aspx" Visible="true">Register</asp:HyperLink>
+
+                <!-- ✅ Admin Links -->
+                <asp:HyperLink ID="lnkAdminLogin" runat="server" NavigateUrl="~/AdminLogin.aspx" CssClass="admin-link">Admin Login</asp:HyperLink> 
+                <asp:HyperLink ID="lnkAdminDashboard" runat="server" NavigateUrl="~/AdminDashboard.aspx" Visible="false">Admin Dashboard</asp:HyperLink>            
+
+                <!-- ✅ Logout Button -->
+                <asp:LinkButton ID="lnkLogout" runat="server" CssClass="logout-button" OnClick="lnkLogout_Click" Visible="false">Logout</asp:LinkButton>
+            </div>
+        </div>
+
+        <!-- ✅ Main Content Section -->
+        <div class="content-wrapper">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server"></asp:ContentPlaceHolder>
+        </div>
+    </form>
+
+    <footer>
+        <p>&copy; 2025 Your Company Name. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
